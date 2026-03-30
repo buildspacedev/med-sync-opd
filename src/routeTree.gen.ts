@@ -14,15 +14,7 @@ import { Route as AdminRouteImport } from './routes/admin'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as OpdIndexRouteImport } from './routes/opd/index'
 import { Route as AdminIndexRouteImport } from './routes/admin/index'
-import { Route as OpdVitalsRouteImport } from './routes/opd/vitals'
-import { Route as OpdSymptomsRouteImport } from './routes/opd/symptoms'
-import { Route as OpdReviewRouteImport } from './routes/opd/review'
-import { Route as OpdReferralRouteImport } from './routes/opd/referral'
-import { Route as OpdPatientIdRouteImport } from './routes/opd/patient-id'
 import { Route as OpdOpdCardRouteImport } from './routes/opd/opd-card'
-import { Route as OpdImageCaptureRouteImport } from './routes/opd/image-capture'
-import { Route as OpdDemographicsRouteImport } from './routes/opd/demographics'
-import { Route as OpdCaptureModeRouteImport } from './routes/opd/capture-mode'
 
 const OpdRoute = OpdRouteImport.update({
   id: '/opd',
@@ -49,49 +41,9 @@ const AdminIndexRoute = AdminIndexRouteImport.update({
   path: '/',
   getParentRoute: () => AdminRoute,
 } as any)
-const OpdVitalsRoute = OpdVitalsRouteImport.update({
-  id: '/vitals',
-  path: '/vitals',
-  getParentRoute: () => OpdRoute,
-} as any)
-const OpdSymptomsRoute = OpdSymptomsRouteImport.update({
-  id: '/symptoms',
-  path: '/symptoms',
-  getParentRoute: () => OpdRoute,
-} as any)
-const OpdReviewRoute = OpdReviewRouteImport.update({
-  id: '/review',
-  path: '/review',
-  getParentRoute: () => OpdRoute,
-} as any)
-const OpdReferralRoute = OpdReferralRouteImport.update({
-  id: '/referral',
-  path: '/referral',
-  getParentRoute: () => OpdRoute,
-} as any)
-const OpdPatientIdRoute = OpdPatientIdRouteImport.update({
-  id: '/patient-id',
-  path: '/patient-id',
-  getParentRoute: () => OpdRoute,
-} as any)
 const OpdOpdCardRoute = OpdOpdCardRouteImport.update({
   id: '/opd-card',
   path: '/opd-card',
-  getParentRoute: () => OpdRoute,
-} as any)
-const OpdImageCaptureRoute = OpdImageCaptureRouteImport.update({
-  id: '/image-capture',
-  path: '/image-capture',
-  getParentRoute: () => OpdRoute,
-} as any)
-const OpdDemographicsRoute = OpdDemographicsRouteImport.update({
-  id: '/demographics',
-  path: '/demographics',
-  getParentRoute: () => OpdRoute,
-} as any)
-const OpdCaptureModeRoute = OpdCaptureModeRouteImport.update({
-  id: '/capture-mode',
-  path: '/capture-mode',
   getParentRoute: () => OpdRoute,
 } as any)
 
@@ -99,29 +51,13 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/admin': typeof AdminRouteWithChildren
   '/opd': typeof OpdRouteWithChildren
-  '/opd/capture-mode': typeof OpdCaptureModeRoute
-  '/opd/demographics': typeof OpdDemographicsRoute
-  '/opd/image-capture': typeof OpdImageCaptureRoute
   '/opd/opd-card': typeof OpdOpdCardRoute
-  '/opd/patient-id': typeof OpdPatientIdRoute
-  '/opd/referral': typeof OpdReferralRoute
-  '/opd/review': typeof OpdReviewRoute
-  '/opd/symptoms': typeof OpdSymptomsRoute
-  '/opd/vitals': typeof OpdVitalsRoute
   '/admin/': typeof AdminIndexRoute
   '/opd/': typeof OpdIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/opd/capture-mode': typeof OpdCaptureModeRoute
-  '/opd/demographics': typeof OpdDemographicsRoute
-  '/opd/image-capture': typeof OpdImageCaptureRoute
   '/opd/opd-card': typeof OpdOpdCardRoute
-  '/opd/patient-id': typeof OpdPatientIdRoute
-  '/opd/referral': typeof OpdReferralRoute
-  '/opd/review': typeof OpdReviewRoute
-  '/opd/symptoms': typeof OpdSymptomsRoute
-  '/opd/vitals': typeof OpdVitalsRoute
   '/admin': typeof AdminIndexRoute
   '/opd': typeof OpdIndexRoute
 }
@@ -130,63 +66,21 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/admin': typeof AdminRouteWithChildren
   '/opd': typeof OpdRouteWithChildren
-  '/opd/capture-mode': typeof OpdCaptureModeRoute
-  '/opd/demographics': typeof OpdDemographicsRoute
-  '/opd/image-capture': typeof OpdImageCaptureRoute
   '/opd/opd-card': typeof OpdOpdCardRoute
-  '/opd/patient-id': typeof OpdPatientIdRoute
-  '/opd/referral': typeof OpdReferralRoute
-  '/opd/review': typeof OpdReviewRoute
-  '/opd/symptoms': typeof OpdSymptomsRoute
-  '/opd/vitals': typeof OpdVitalsRoute
   '/admin/': typeof AdminIndexRoute
   '/opd/': typeof OpdIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths:
-    | '/'
-    | '/admin'
-    | '/opd'
-    | '/opd/capture-mode'
-    | '/opd/demographics'
-    | '/opd/image-capture'
-    | '/opd/opd-card'
-    | '/opd/patient-id'
-    | '/opd/referral'
-    | '/opd/review'
-    | '/opd/symptoms'
-    | '/opd/vitals'
-    | '/admin/'
-    | '/opd/'
+  fullPaths: '/' | '/admin' | '/opd' | '/opd/opd-card' | '/admin/' | '/opd/'
   fileRoutesByTo: FileRoutesByTo
-  to:
-    | '/'
-    | '/opd/capture-mode'
-    | '/opd/demographics'
-    | '/opd/image-capture'
-    | '/opd/opd-card'
-    | '/opd/patient-id'
-    | '/opd/referral'
-    | '/opd/review'
-    | '/opd/symptoms'
-    | '/opd/vitals'
-    | '/admin'
-    | '/opd'
+  to: '/' | '/opd/opd-card' | '/admin' | '/opd'
   id:
     | '__root__'
     | '/'
     | '/admin'
     | '/opd'
-    | '/opd/capture-mode'
-    | '/opd/demographics'
-    | '/opd/image-capture'
     | '/opd/opd-card'
-    | '/opd/patient-id'
-    | '/opd/referral'
-    | '/opd/review'
-    | '/opd/symptoms'
-    | '/opd/vitals'
     | '/admin/'
     | '/opd/'
   fileRoutesById: FileRoutesById
@@ -234,67 +128,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminIndexRouteImport
       parentRoute: typeof AdminRoute
     }
-    '/opd/vitals': {
-      id: '/opd/vitals'
-      path: '/vitals'
-      fullPath: '/opd/vitals'
-      preLoaderRoute: typeof OpdVitalsRouteImport
-      parentRoute: typeof OpdRoute
-    }
-    '/opd/symptoms': {
-      id: '/opd/symptoms'
-      path: '/symptoms'
-      fullPath: '/opd/symptoms'
-      preLoaderRoute: typeof OpdSymptomsRouteImport
-      parentRoute: typeof OpdRoute
-    }
-    '/opd/review': {
-      id: '/opd/review'
-      path: '/review'
-      fullPath: '/opd/review'
-      preLoaderRoute: typeof OpdReviewRouteImport
-      parentRoute: typeof OpdRoute
-    }
-    '/opd/referral': {
-      id: '/opd/referral'
-      path: '/referral'
-      fullPath: '/opd/referral'
-      preLoaderRoute: typeof OpdReferralRouteImport
-      parentRoute: typeof OpdRoute
-    }
-    '/opd/patient-id': {
-      id: '/opd/patient-id'
-      path: '/patient-id'
-      fullPath: '/opd/patient-id'
-      preLoaderRoute: typeof OpdPatientIdRouteImport
-      parentRoute: typeof OpdRoute
-    }
     '/opd/opd-card': {
       id: '/opd/opd-card'
       path: '/opd-card'
       fullPath: '/opd/opd-card'
       preLoaderRoute: typeof OpdOpdCardRouteImport
-      parentRoute: typeof OpdRoute
-    }
-    '/opd/image-capture': {
-      id: '/opd/image-capture'
-      path: '/image-capture'
-      fullPath: '/opd/image-capture'
-      preLoaderRoute: typeof OpdImageCaptureRouteImport
-      parentRoute: typeof OpdRoute
-    }
-    '/opd/demographics': {
-      id: '/opd/demographics'
-      path: '/demographics'
-      fullPath: '/opd/demographics'
-      preLoaderRoute: typeof OpdDemographicsRouteImport
-      parentRoute: typeof OpdRoute
-    }
-    '/opd/capture-mode': {
-      id: '/opd/capture-mode'
-      path: '/capture-mode'
-      fullPath: '/opd/capture-mode'
-      preLoaderRoute: typeof OpdCaptureModeRouteImport
       parentRoute: typeof OpdRoute
     }
   }
@@ -311,28 +149,12 @@ const AdminRouteChildren: AdminRouteChildren = {
 const AdminRouteWithChildren = AdminRoute._addFileChildren(AdminRouteChildren)
 
 interface OpdRouteChildren {
-  OpdCaptureModeRoute: typeof OpdCaptureModeRoute
-  OpdDemographicsRoute: typeof OpdDemographicsRoute
-  OpdImageCaptureRoute: typeof OpdImageCaptureRoute
   OpdOpdCardRoute: typeof OpdOpdCardRoute
-  OpdPatientIdRoute: typeof OpdPatientIdRoute
-  OpdReferralRoute: typeof OpdReferralRoute
-  OpdReviewRoute: typeof OpdReviewRoute
-  OpdSymptomsRoute: typeof OpdSymptomsRoute
-  OpdVitalsRoute: typeof OpdVitalsRoute
   OpdIndexRoute: typeof OpdIndexRoute
 }
 
 const OpdRouteChildren: OpdRouteChildren = {
-  OpdCaptureModeRoute: OpdCaptureModeRoute,
-  OpdDemographicsRoute: OpdDemographicsRoute,
-  OpdImageCaptureRoute: OpdImageCaptureRoute,
   OpdOpdCardRoute: OpdOpdCardRoute,
-  OpdPatientIdRoute: OpdPatientIdRoute,
-  OpdReferralRoute: OpdReferralRoute,
-  OpdReviewRoute: OpdReviewRoute,
-  OpdSymptomsRoute: OpdSymptomsRoute,
-  OpdVitalsRoute: OpdVitalsRoute,
   OpdIndexRoute: OpdIndexRoute,
 }
 

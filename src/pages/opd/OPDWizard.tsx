@@ -180,7 +180,7 @@ function Section({
         <div className="flex-1">
           <div className="flex items-center gap-2">
             <span
-              className={`font-bold text-base ${isActive ? "text-[#34b6b3]" : isCompleted ? "text-[#10b981]" : "text-gray-400"}`}
+              className={`font-bold text-lg ${isActive ? "text-[#34b6b3]" : isCompleted ? "text-[#10b981]" : "text-gray-400"}`}
             >
               {title}
             </span>
@@ -472,8 +472,8 @@ export default function OPDWizard() {
     <div className="flex-1 flex flex-col pb-16">
       {/* Progress bar */}
       <div className="sticky top-0 z-20 bg-white/80 backdrop-blur-md border-b border-gray-100 px-4 py-3 mt-5">
-        <div className="max-w-3xl mx-auto flex items-center gap-4">
-          <span className="text-xs font-semibold text-gray-400 whitespace-nowrap">
+        <div className="max-w-3xl mx-auto flex items-center gap-4 border-2 p-4 rounded-lg border-brand-primary">
+          <span className="text-lg text-gray-400 whitespace-nowrap">
             Step {Math.min(activeSection + 1, totalSections)} of {totalSections}
           </span>
           <div className="flex-1 h-2 bg-gray-100 rounded-full overflow-hidden">
@@ -554,7 +554,7 @@ export default function OPDWizard() {
             </span>
           }
         >
-          <div className="mt-4 space-y-4">
+          <div className="mt-4 space-y-4 flex flex-col">
             <Input
               label={t("uhid_label")}
               placeholder={t("uhid_placeholder")}
@@ -564,27 +564,25 @@ export default function OPDWizard() {
             />
             <Button
               variant="primary"
-              size="large"
               isLoading={verifying}
               onClick={handleVerify}
-              className="w-full rounded-xl font-bold shadow-md shadow-[#34b6b3]/30"
+              className=" mx-auto rounded-xl font-bold shadow-md shadow-[#34b6b3]/30"
             >
               <Search size={18} className="mr-2" />
               {t("uhid_verify")}
             </Button>
-            <div className="relative flex items-center py-2">
-              <div className="flex-grow border-t border-gray-200" />
+            <div className="relative flex items-center justify-center py-2">
+              <div className=" border-t border-gray-200 w-40" />
               <span className="shrink-0 mx-4 text-gray-400 text-sm font-bold">
                 OR
               </span>
-              <div className="flex-grow border-t border-gray-200" />
+              <div className=" border-t border-gray-200 w-40" />
             </div>
             <Button
               variant="outline"
-              size="large"
               icon={<UserPlus size={18} />}
               onClick={handleNewPatient}
-              className="w-full rounded-xl border-2 border-dashed border-[#34b6b3] text-[#34b6b3] hover:bg-[#34b6b3]/5 font-bold"
+              className="mx-auto rounded-xl border-2 border-dashed border-[#34b6b3] text-[#34b6b3] hover:bg-[#34b6b3]/5 font-bold"
             >
               {t("uhid_new_patient")}
             </Button>
@@ -621,19 +619,19 @@ export default function OPDWizard() {
             {[
               {
                 mode: "manual" as CaptureMode,
-                icon: <Edit size={22} />,
+                icon: <Edit size={15} />,
                 titleKey: "capture_mode_manual",
                 descKey: "capture_mode_manual_desc",
               },
               {
                 mode: "voice" as CaptureMode,
-                icon: <Mic size={22} />,
+                icon: <Mic size={15} />,
                 titleKey: "capture_mode_voice",
                 descKey: "capture_mode_voice_desc",
               },
               {
                 mode: "image" as CaptureMode,
-                icon: <Camera size={22} />,
+                icon: <Camera size={15} />,
                 titleKey: "capture_mode_image",
                 descKey: "capture_mode_image_desc",
               },
@@ -644,11 +642,11 @@ export default function OPDWizard() {
                   key={mode}
                   whileTap={{ scale: 0.98 }}
                   onClick={() => handleCaptureMode(mode)}
-                  className={`flex items-center gap-4 p-4 rounded-xl border-2 cursor-pointer transition-all
+                  className={`w-96 flex items-center justify-center mx-auto gap-4 p-4 rounded-xl border-2 cursor-pointer transition-all
                     ${isSelected ? "border-[#34b6b3] bg-[#34b6b3]/5" : "border-gray-100 hover:border-[#34b6b3]/30 bg-white"}`}
                 >
                   <div
-                    className={`w-12 h-12 rounded-full flex items-center justify-center transition-colors
+                    className={`w-10 h-10 rounded-full flex items-center justify-center transition-colors
                     ${isSelected ? "bg-[#34b6b3] text-white" : "bg-gray-100 text-gray-500"}`}
                   >
                     {icon}
@@ -662,7 +660,7 @@ export default function OPDWizard() {
                     <p className="text-sm text-gray-500">{t(descKey)}</p>
                   </div>
                   <div
-                    className={`w-5 h-5 rounded-full border-2 flex items-center justify-center
+                    className={`w-4 h-4 rounded-full border-2 flex items-center justify-center
                     ${isSelected ? "border-[#34b6b3] bg-[#34b6b3]" : "border-gray-300"}`}
                   >
                     {isSelected && (
@@ -756,7 +754,6 @@ export default function OPDWizard() {
               <div className="flex justify-between items-center mt-4">
                 <Button
                   variant="text"
-                  size="large"
                   onClick={() => next(2)}
                   disabled={extracting}
                   className="rounded-xl px-0 text-gray-500 hover:text-gray-700"
@@ -765,7 +762,6 @@ export default function OPDWizard() {
                 </Button>
                 <Button
                   variant="outline"
-                  size="large"
                   onClick={() => next(4)}
                   disabled={extracting}
                   className="rounded-xl px-6"
@@ -849,7 +845,7 @@ export default function OPDWizard() {
                 <label className="text-sm font-bold text-gray-700 ml-1">
                   {t("field_mobile")} *
                 </label>
-                <div className="flex gap-2">
+                <div className="flex flex-col gap-2">
                   <Input
                     name="mobile"
                     value={demo.mobile}
@@ -859,13 +855,13 @@ export default function OPDWizard() {
                     className="flex-1"
                     fullWidth={false}
                   />
-                  <Button
+                  {/* <Button
                     variant="outline"
                     type="button"
                     className="h-12 rounded-xl whitespace-nowrap"
                   >
                     {t("field_otp_verify")}
-                  </Button>
+                  </Button> */}
                 </div>
               </div>
               <Input
@@ -880,7 +876,6 @@ export default function OPDWizard() {
               <div className="md:col-span-2 flex justify-between items-center mt-2">
                 <Button
                   variant="text"
-                  size="large"
                   type="button"
                   onClick={() => next(opdState.captureMode === "image" ? 3 : 2)}
                   className="rounded-xl px-0 text-gray-500 hover:text-gray-700"
@@ -889,7 +884,6 @@ export default function OPDWizard() {
                 </Button>
                 <Button
                   variant="primary"
-                  size="large"
                   type="submit"
                   className="rounded-xl px-10 font-bold shadow-md shadow-[#34b6b3]/30"
                 >
@@ -1040,7 +1034,6 @@ export default function OPDWizard() {
             <div className="flex justify-between items-center">
               <Button
                 variant="text"
-                size="large"
                 onClick={() => next(4)}
                 className="rounded-xl px-0 text-gray-500 hover:text-gray-700"
               >
@@ -1048,7 +1041,6 @@ export default function OPDWizard() {
               </Button>
               <Button
                 variant="primary"
-                size="large"
                 onClick={handleSymptomsNext}
                 className="rounded-xl px-10 font-bold shadow-md shadow-[#34b6b3]/30"
               >
@@ -1154,7 +1146,6 @@ export default function OPDWizard() {
             <div className="col-span-2 flex justify-between items-center mt-2">
               <Button
                 variant="text"
-                size="large"
                 type="button"
                 onClick={() => next(5)}
                 className="text-gray-500 hover:text-gray-700 rounded-xl px-0 text-base"
@@ -1172,7 +1163,6 @@ export default function OPDWizard() {
                 </Button>
                 <Button
                   variant="primary"
-                  size="large"
                   type="submit"
                   className="rounded-xl px-10 font-bold shadow-md shadow-[#34b6b3]/30"
                 >
@@ -1568,10 +1558,9 @@ export default function OPDWizard() {
             )}
 
             {/* Submit */}
-            <div className="flex items-center gap-4 mt-6">
+            <div className="flex items-center justify-between gap-4 mt-6">
               <Button
                 variant="text"
-                size="large"
                 onClick={() => next(opdState.referralRequired ? 7 : 6)}
                 className="rounded-xl px-0 text-gray-500 hover:text-gray-700 whitespace-nowrap"
               >
@@ -1579,13 +1568,12 @@ export default function OPDWizard() {
               </Button>
               <Button
                 variant="primary"
-                size="large"
                 isLoading={submitting}
                 onClick={handleSubmit}
                 disabled={
                   opdState.referralRequired && !opdState.referralVerified
                 }
-                className="flex-1 rounded-xl h-14 font-bold text-base shadow-lg shadow-[#34b6b3]/40 bg-gradient-to-r from-[#34b6b3] to-[#0da0b8] border-none"
+                className="rounded-xl h-14 font-bold text-base shadow-lg shadow-[#34b6b3]/40 bg-gradient-to-r from-[#34b6b3] to-[#0da0b8] border-none"
               >
                 {t("review_confirm")}
               </Button>
