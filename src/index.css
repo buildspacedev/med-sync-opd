@@ -1,0 +1,166 @@
+@import "tailwindcss";
+
+@theme {
+  --font-outfit: "Outfit", sans-serif;
+  --font-mono: "JetBrains Mono", monospace;
+
+  /* Brand Colors */
+  --color-brand-primary: #34b6b3;
+  --color-brand-primary-dark: #0da0b8;
+  --color-brand-light: #e8f8f7;
+  --color-brand-medium: #40c4aa;
+
+  /* Text */
+  --color-text-primary: #1c3553;
+  --color-text-secondary: #6b7280;
+  --color-text-tertiary: #9ca3af;
+  --color-text-inverse: #ffffff;
+
+  /* Backgrounds */
+  --color-bg-app: #ffffff;
+  --color-bg-secondary: #f9fafb;
+  --color-bg-tertiary: #f3f4f6;
+  --color-bg-card: #ffffff;
+
+  /* Status */
+  --color-success: #10b981;
+  --color-warning: #f59e0b;
+  --color-error: #ef4444;
+  --color-info: #3b82f6;
+
+  /* Step colors */
+  --color-step-active: #34b6b3;
+  --color-step-done: #10b981;
+  --color-step-pending: #e5e7eb;
+
+  --radius-sm: 0.375rem;
+  --radius-md: 0.625rem;
+  --radius-lg: 1rem;
+  --radius-xl: 1.5rem;
+}
+
+@layer base {
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    font-family: var(--font-outfit);
+    color: var(--color-text-primary);
+    background-color: var(--color-bg-app);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  [dir="rtl"] {
+    text-align: right;
+  }
+}
+
+/* Scrollbars */
+.hide-scrollbar {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.custom-scrollbar::-webkit-scrollbar {
+  width: 4px;
+}
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+  border-radius: 10px;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background-color: #34b6b484;
+  border-radius: 10px;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background-color: #34b6b3;
+}
+
+/* OPD Card print styles */
+@media print {
+  .no-print {
+    display: none !important;
+  }
+  .print-only {
+    display: block !important;
+  }
+  body {
+    background: white;
+  }
+}
+
+/* Animations */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pulse-ring {
+  0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(52, 182, 179, 0.4); }
+  70% { transform: scale(1); box-shadow: 0 0 0 10px rgba(52, 182, 179, 0); }
+  100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(52, 182, 179, 0); }
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 0.4s ease-out forwards;
+}
+
+.animate-pulse-ring {
+  animation: pulse-ring 2s cubic-bezier(0.455, 0.03, 0.515, 0.955) infinite;
+}
+
+/* Glassmorphism utility */
+.glass-card {
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+/* Gradient utilities */
+.gradient-brand {
+  background: linear-gradient(135deg, #34b6b3 0%, #0da0b8 100%);
+}
+
+.gradient-bg {
+  background: linear-gradient(135deg, #e8f8f7 0%, #f0f9ff 50%, #fafbfc 100%);
+}
+
+/* Step indicator line */
+.step-line {
+  height: 2px;
+  background: var(--color-step-pending);
+  flex: 1;
+  transition: background 0.4s ease;
+}
+.step-line.done {
+  background: var(--color-step-done);
+}
+.step-line.active {
+  background: linear-gradient(to right, var(--color-step-done), var(--color-step-active));
+}
+
+/* Form input focus ring matching brand */
+input:focus, select:focus, textarea:focus {
+  outline: none;
+  border-color: var(--color-brand-primary) !important;
+  box-shadow: 0 0 0 3px rgba(52, 182, 179, 0.15);
+}
+
