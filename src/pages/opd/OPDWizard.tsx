@@ -572,11 +572,11 @@ export default function OPDWizard() {
               {t("uhid_verify")}
             </Button>
             <div className="relative flex items-center justify-center py-2">
-              <div className=" border-t border-gray-200 w-40" />
+              <div className=" border-t border-gray-200 flex-1" />
               <span className="shrink-0 mx-4 text-gray-400 text-sm font-bold">
                 OR
               </span>
-              <div className=" border-t border-gray-200 w-40" />
+              <div className=" border-t border-gray-200 flex-1" />
             </div>
             <Button
               variant="outline"
@@ -642,7 +642,7 @@ export default function OPDWizard() {
                   key={mode}
                   whileTap={{ scale: 0.98 }}
                   onClick={() => handleCaptureMode(mode)}
-                  className={`w-96 flex items-center justify-center mx-auto gap-4 p-4 rounded-xl border-2 cursor-pointer transition-all
+                  className={`w-full max-w-sm flex items-center justify-center mx-auto gap-4 p-4 rounded-xl border-2 cursor-pointer transition-all
                     ${isSelected ? "border-[#34b6b3] bg-[#34b6b3]/5" : "border-gray-100 hover:border-[#34b6b3]/30 bg-white"}`}
                 >
                   <div

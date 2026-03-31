@@ -145,13 +145,13 @@ export default function OPDCard() {
         </div>
       </motion.div>
 
-      <div className="mt-10 flex gap-4 no-print">
+      <div className="mt-10 flex flex-col sm:flex-row gap-4 no-print w-full px-4 sm:px-0 max-w-[420px] sm:max-w-none">
         <Button
           size="large"
           variant="primary"
           icon={<Printer size={20} />}
           onClick={handlePrint}
-          className="rounded-xl px-8 h-12 font-bold bg-[#1c3553] text-white hover:bg-[#1c3553]/90 border-none shadow-lg shadow-[#1c3553]/20"
+          className="rounded-xl px-8 h-12 font-bold bg-[#1c3553] text-white hover:bg-[#1c3553]/90 border-none shadow-lg shadow-[#1c3553]/20 w-full sm:w-auto"
         >
           {t("opd_card_print")}
         </Button>
@@ -160,7 +160,7 @@ export default function OPDCard() {
           variant="outline"
           icon={<Home size={20} />}
           onClick={handleHome}
-          className="rounded-xl px-8 h-12 font-bold"
+          className="rounded-xl px-8 h-12 font-bold w-full sm:w-auto"
         >
           New Patient
         </Button>
