@@ -1,22 +1,17 @@
-import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
-import apiClient from "./client";
-import { queryKeys } from "./queryKeys";
-import type { AdminPatient, PatientDemographics } from "@/types/opd";
+import { useQuery } from "@tanstack/react-query";
+import { queryKeys } from "../queryKeys";
+import type { AdminPatient, PatientDemographics } from "../../types/opd";
 
-// ─── Types ────────────────────────────────────────────────────────────────────
-
+/**
+ * Result of a patient UHID lookup.
+ */
 export interface PatientLookupResult {
   exists: boolean;
   uhid: string;
   demographics?: PatientDemographics;
 }
 
-export interface CreatePatientPayload {
-  demographics: PatientDemographics;
-  uhid?: string;
-}
-
-// ─── MOCK DATA (replace fetch function body when real API is ready) ──────────
+// ─── MOCK DATA ───────────────────────────────────────────────────────────────
 
 const MOCK_ADMIN_PATIENTS: AdminPatient[] = [
   { id: "1", uhid: "UHID-2024-1001", name: "Rahul Sharma", specialty: "Cardiology", room: "OPD-201", status: "waiting", visitDate: new Date().toISOString(), mobile: "9876543210" },
@@ -27,11 +22,9 @@ const MOCK_ADMIN_PATIENTS: AdminPatient[] = [
   { id: "6", uhid: "UHID-1006", name: "Anita Desai", specialty: "Dermatology & Venereology", room: "OPD-203", status: "completed", visitDate: new Date().toISOString(), mobile: "9898989898" },
 ];
 
-// ─── Hooks ───────────────────────────────────────────────────────────────────
-
 /**
  * Look up a patient by UHID.
- * TODO: Replace mock with → apiClient.get(`/patients/${uhid}`)
+ * @param uhid - The Unique Health ID to look for.
  */
 export function usePatientQuery(uhid: string) {
   return useQuery({
@@ -51,30 +44,8 @@ export function usePatientQuery(uhid: string) {
 }
 
 /**
- * Create a new patient record.
- * TODO: Replace mock with → apiClient.post('/patients', payload)
- */
-export function useCreatePatientMutation() {
-  const queryClient = useQueryClient();
-  return useMutation({
-    mutationFn: async (payload: CreatePatientPayload) => {
-      // MOCK
-      await new Promise((r) => setTimeout(r, 500));
-      return { uhid: payload.uhid || `UHID-NEW-${Date.now()}`, ...payload };
-
-      // REAL API (uncomment when backend ready):
-      // const res = await apiClient.post('/patients', payload);
-      // return res.data;
-    },
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: queryKeys.patients.all() });
-    },
-  });
-}
-
-/**
- * Fetch all patients for admin dashboard.
- * TODO: Replace mock with → apiClient.get('/admin/patients', { params: filters })
+ * Fetch all patients for the admin dashboard.
+ * @param filters - The status and department filters for the admin view.
  */
 export function useAdminPatientsQuery(filters?: { status?: string; department?: string }) {
   return useQuery({

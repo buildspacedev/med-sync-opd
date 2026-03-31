@@ -10,20 +10,13 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as OpdRouteImport } from './routes/opd'
-import { Route as AdminRouteImport } from './routes/admin'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as OpdIndexRouteImport } from './routes/opd/index'
-import { Route as AdminIndexRouteImport } from './routes/admin/index'
 import { Route as OpdOpdCardRouteImport } from './routes/opd/opd-card'
 
 const OpdRoute = OpdRouteImport.update({
   id: '/opd',
   path: '/opd',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const AdminRoute = AdminRouteImport.update({
-  id: '/admin',
-  path: '/admin',
   getParentRoute: () => rootRouteImport,
 } as any)
 const IndexRoute = IndexRouteImport.update({
@@ -36,11 +29,6 @@ const OpdIndexRoute = OpdIndexRouteImport.update({
   path: '/',
   getParentRoute: () => OpdRoute,
 } as any)
-const AdminIndexRoute = AdminIndexRouteImport.update({
-  id: '/',
-  path: '/',
-  getParentRoute: () => AdminRoute,
-} as any)
 const OpdOpdCardRoute = OpdOpdCardRouteImport.update({
   id: '/opd-card',
   path: '/opd-card',
@@ -49,45 +37,32 @@ const OpdOpdCardRoute = OpdOpdCardRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
-  '/admin': typeof AdminRouteWithChildren
   '/opd': typeof OpdRouteWithChildren
   '/opd/opd-card': typeof OpdOpdCardRoute
-  '/admin/': typeof AdminIndexRoute
   '/opd/': typeof OpdIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/opd/opd-card': typeof OpdOpdCardRoute
-  '/admin': typeof AdminIndexRoute
   '/opd': typeof OpdIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
-  '/admin': typeof AdminRouteWithChildren
   '/opd': typeof OpdRouteWithChildren
   '/opd/opd-card': typeof OpdOpdCardRoute
-  '/admin/': typeof AdminIndexRoute
   '/opd/': typeof OpdIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/admin' | '/opd' | '/opd/opd-card' | '/admin/' | '/opd/'
+  fullPaths: '/' | '/opd' | '/opd/opd-card' | '/opd/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/opd/opd-card' | '/admin' | '/opd'
-  id:
-    | '__root__'
-    | '/'
-    | '/admin'
-    | '/opd'
-    | '/opd/opd-card'
-    | '/admin/'
-    | '/opd/'
+  to: '/' | '/opd/opd-card' | '/opd'
+  id: '__root__' | '/' | '/opd' | '/opd/opd-card' | '/opd/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
-  AdminRoute: typeof AdminRouteWithChildren
   OpdRoute: typeof OpdRouteWithChildren
 }
 
@@ -98,13 +73,6 @@ declare module '@tanstack/react-router' {
       path: '/opd'
       fullPath: '/opd'
       preLoaderRoute: typeof OpdRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/admin': {
-      id: '/admin'
-      path: '/admin'
-      fullPath: '/admin'
-      preLoaderRoute: typeof AdminRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/': {
@@ -121,13 +89,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof OpdIndexRouteImport
       parentRoute: typeof OpdRoute
     }
-    '/admin/': {
-      id: '/admin/'
-      path: '/'
-      fullPath: '/admin/'
-      preLoaderRoute: typeof AdminIndexRouteImport
-      parentRoute: typeof AdminRoute
-    }
     '/opd/opd-card': {
       id: '/opd/opd-card'
       path: '/opd-card'
@@ -137,16 +98,6 @@ declare module '@tanstack/react-router' {
     }
   }
 }
-
-interface AdminRouteChildren {
-  AdminIndexRoute: typeof AdminIndexRoute
-}
-
-const AdminRouteChildren: AdminRouteChildren = {
-  AdminIndexRoute: AdminIndexRoute,
-}
-
-const AdminRouteWithChildren = AdminRoute._addFileChildren(AdminRouteChildren)
 
 interface OpdRouteChildren {
   OpdOpdCardRoute: typeof OpdOpdCardRoute
@@ -162,7 +113,6 @@ const OpdRouteWithChildren = OpdRoute._addFileChildren(OpdRouteChildren)
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-  AdminRoute: AdminRouteWithChildren,
   OpdRoute: OpdRouteWithChildren,
 }
 export const routeTree = rootRouteImport

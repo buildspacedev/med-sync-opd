@@ -1,3 +1,8 @@
+/**
+ * Redux Slice for OPD Session.
+ * IMPORTANT: This slice manages ONLY UI and local session state (e.g., wizard steps, form inputs).
+ * Server-side state (API responses, cache) is managed by TanStack Query.
+ */
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import type {
   Language,

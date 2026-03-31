@@ -145,7 +145,7 @@ export default function OPDCard() {
         </div>
       </motion.div>
 
-      <div className="mt-10 flex flex-col sm:flex-row gap-4 no-print w-full px-4 sm:px-0 max-w-[420px] sm:max-w-none">
+      <div className="mt-10 flex flex-col items-center justify-center sm:flex-row gap-4 no-print w-full max-w-[420px]">
         <Button
           size="large"
           variant="primary"

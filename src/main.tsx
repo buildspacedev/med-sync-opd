@@ -6,14 +6,17 @@ import { Provider as ReduxProvider } from "react-redux";
 import { store } from "@/redux/store";
 import { routeTree } from "./routeTree.gen";
 import { ToastProvider } from "@/components/ui/Toast";
+import ErrorBoundary from "@/components/error/ErrorBoundary";
+import { QUERY_CONFIG } from "@/constants/queryConfig";
 import "@/i18n";
 import "./index.css";
 
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
-      staleTime: 1000 * 60 * 5, // 5 minutes
-      retry: 1,
+      staleTime: QUERY_CONFIG.STALE_TIME,
+      gcTime: QUERY_CONFIG.GC_TIME,
+      retry: QUERY_CONFIG.RETRY,
     },
   },
 });
@@ -28,12 +31,14 @@ declare module "@tanstack/react-router" {
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
-    <ReduxProvider store={store}>
-      <QueryClientProvider client={queryClient}>
-        <ToastProvider>
-          <RouterProvider router={router} />
-        </ToastProvider>
-      </QueryClientProvider>
-    </ReduxProvider>
+    <ErrorBoundary>
+      <ReduxProvider store={store}>
+        <QueryClientProvider client={queryClient}>
+          <ToastProvider>
+            <RouterProvider router={router} />
+          </ToastProvider>
+        </QueryClientProvider>
+      </ReduxProvider>
+    </ErrorBoundary>
   </React.StrictMode>,
 );
